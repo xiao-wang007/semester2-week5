@@ -55,6 +55,16 @@ int main(void) {
 	// Complete your code here
     switch (violation_type) {
         case 1:
+            printf("Violation: Speeding\n");
+            fine = 100.0;
+            break;
+        case 2:
+            printf("Violation: Signal Jumping\n");
+            fine = 150.0;
+            break;
+        case 3:
+            printf("Violation: Illegal Parking\n");
+            fine = 50.0;
             break;
 
         default:
@@ -66,7 +76,10 @@ int main(void) {
 	// Complete your code here
 	
 	if (repeat_offense == 1) {
-		// todo
+		printf("Repeat offense: Yes\n");
+		fine *= 2;
+	} else {
+		printf("Repeat offense: No\n");
 	}
 
     /* Output final fine */

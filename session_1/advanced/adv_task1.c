@@ -32,7 +32,43 @@ int main(int argc, char *argv[]) {
     float b = atof(argv[2]);
     float c = atof(argv[3]);
 	
-	//complete the rest of the code
+	// Check if a is 0 (linear equation)
+	if (a == 0) {
+		printf("Linear equation\n");
+		if (b != 0) {
+			float x = -c / b;
+			printf("Solution: x = %.2f\n", x);
+		} else if (c == 0) {
+			printf("All real numbers are solutions.\n");
+		} else {
+			printf("No solution.\n");
+		}
+		return 0;
+	}
+
+	// Calculate determinant D = b^2 - 4ac
+	float D = b * b - 4 * a * c;
+
+	if (D > 0) {
+		// Two distinct real roots
+		float x1 = (-b + sqrt(D)) / (2 * a);
+		float x2 = (-b - sqrt(D)) / (2 * a);
+		printf("Two distinct real roots:\n");
+		printf("x1 = %.2f\n", x1);
+		printf("x2 = %.2f\n", x2);
+	} else if (D == 0) {
+		// Single (repeated) root
+		float x = -b / (2 * a);
+		printf("One repeated root:\n");
+		printf("x = %.2f\n", x);
+	} else {
+		// Complex roots: D < 0
+		float realPart = -b / (2 * a);
+		float imagPart = sqrt(-D) / (2 * a);
+		printf("Complex roots:\n");
+		printf("x1 = %.2f + %.2fi\n", realPart, imagPart);
+		printf("x2 = %.2f - %.2fi\n", realPart, imagPart);
+	}
 	
 	return 0;
 }
