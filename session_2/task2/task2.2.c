@@ -12,7 +12,23 @@
  #include <string.h>
  
  int main(void) {
-	 
+	 char message[200];
+
+	 while(1){
+		 printf("Enter a message (type \"quit\" to stop): ");
+		 if(fgets(message, sizeof(message), stdin) == NULL){
+			 return 1;
+		 }
+
+		 message[strcspn(message, "\n")] = '\0';
+		 if(strcmp(message, "quit") == 0){
+			 break;
+		 }
+
+		 printf("You entered: %s\n", message);
+	 }
+
+	 printf("Program ended.\n");
 	 
 	 return 0;
  }

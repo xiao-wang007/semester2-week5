@@ -16,8 +16,19 @@
 int main(void){
 	int matrix[3][2] = {{1, 2}, {3, 4}, {5, 6}};
     int flattened[6];
+	int index = 0;
 	
-	// complete the rest of the code here
+	for(int row = 0; row < 3; row++){
+		for(int col = 0; col < 2; col++){
+			flattened[index] = matrix[row][col];
+			index++;
+		}
+	}
+
+	for(int i = 0; i < 6; i++){
+		printf("%d ", flattened[i]);
+	}
+	printf("\n");
 	
 	return 0;
 }

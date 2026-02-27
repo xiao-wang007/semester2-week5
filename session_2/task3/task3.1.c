@@ -9,6 +9,7 @@
 #include <stdlib.h>  // For rand(), srand(), atoi()
 #include <time.h>    // For time()
 #include <string.h>  // For strcspn()
+#include <ctype.h>
 
 int main(void) {
     char input[20];      // Buffer for input
@@ -25,35 +26,66 @@ int main(void) {
     printf("=== Number Guessing Game ===\n");
     printf("I'm thinking of a number between %d and %d\n", min, max);
     
-    // TODO: Generate a random number between min and max
-    // Hint: target = min + rand() % (max - min + 1);
-    
-    // TODO: Implement the main game loop
-    // This should continue until the person decides to quit
-    
+    while (playing) {
+        target = min + rand() % (max - min + 1);
+
         // Reset number of guesses for a new game
         num_guesses = 0;
         
-        // TODO: Implement the guessing loop
-        // This should continue until the correct number is guessed
-        
+        while (1) {
             printf("Enter your guess: ");
             
-            // TODO: Read and process the input
-            // Use fgets() to read input
-            // Use atoi() to convert to integer
+            if (fgets(input, sizeof(input), stdin) == NULL) {
+                return 1;
+            }
+            input[strcspn(input, "\n")] = '\0';
+
+            char *endptr;
+            long parsed = strtol(input, &endptr, 10);
+            while (*endptr != '\0' && isspace((unsigned char)*endptr)) {
+                endptr++;
+            }
+            if (endptr == input || *endptr != '\0') {
+                printf("Please enter a valid whole number.\n");
+                continue;
+            }
+
+            guess = (int)parsed;
+            if (guess < min || guess > max) {
+                printf("Guess must be between %d and %d.\n", min, max);
+                continue;
+            }
             
             num_guesses++;
             
-            // TODO: Check if the guess is correct, too high, or too low
-            // Provide appropriate in-game feedback
+            if (guess == target) {
+                printf("Correct! You guessed it in %d attempts.\n", num_guesses);
+                break;
+            } else if (guess > target) {
+                printf("Too high.\n");
+            } else {
+                printf("Too low.\n");
+            }
             
-            // TODO: Offer a hint after several failed attempts
-            
-        
-        // TODO: Ask if the person wants to play again
-        // Update the 'playing' flag based on the answer
-    
+            if (num_guesses == 5) {
+                if (target % 2 == 0) {
+                    printf("Hint: The number is even.\n");
+                } else {
+                    printf("Hint: The number is odd.\n");
+                }
+            }
+        }
+
+        printf("Play again? (y/n): ");
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            return 1;
+        }
+        if (input[0] != 'y' && input[0] != 'Y') {
+            playing = 0;
+        } else {
+            printf("I'm thinking of a new number between %d and %d\n", min, max);
+        }
+    }
     
     printf("\nThanks for playing!\n");
     return 0;

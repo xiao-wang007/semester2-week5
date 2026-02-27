@@ -12,8 +12,29 @@ int main(void){
  *     if choice == 'q':
  *         break
  */
-	char choice;
-	// complete the rest of the code here
+	char input[20];
+	char choice = '\0';
+
+	printf("While loop version:\n");
+	while(1){
+		printf("Enter 'q' to quit: ");
+		if(fgets(input, sizeof(input), stdin) == NULL){
+			return 1;
+		}
+		choice = input[0];
+		if(choice == 'q'){
+			break;
+		}
+	}
+
+	printf("Do...while version:\n");
+	do{
+		printf("Enter 'q' to quit: ");
+		if(fgets(input, sizeof(input), stdin) == NULL){
+			return 1;
+		}
+		choice = input[0];
+	} while(choice != 'q');
 	
     return 0;
 }

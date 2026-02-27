@@ -11,7 +11,19 @@ int main(void){
      char password[50];
 	 
 	 // compare using strcmp(str1,str2) from week 4
-	 // complete the rest of the code here
+	 while(1){
+		 printf("Enter password: ");
+		 if(fgets(password, sizeof(password), stdin) == NULL){
+			 return 1;
+		 }
+
+		 password[strcspn(password, "\n")] = '\0';
+		 if(strcmp(password, "secure123") == 0){
+			 printf("Access granted.\n");
+			 break;
+		 }
+		 printf("Incorrect password. Try again.\n");
+	 }
 	
     return 0;
 }

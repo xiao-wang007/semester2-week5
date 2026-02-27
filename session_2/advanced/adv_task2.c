@@ -18,10 +18,18 @@
 int main(void ) {
     int list1[] = {1, 2};
     int list2[] = {10, 20};
+	int list1_len = sizeof(list1) / sizeof(list1[0]);
+	int list2_len = sizeof(list2) / sizeof(list2[0]);
 
     printf("Pairs with sum > 20:\n");
 	
-	//complete your code here
+	for(int i = 0; i < list1_len; i++){
+		for(int j = 0; j < list2_len; j++){
+			if(list1[i] + list2[j] > 20){
+				printf("(%d, %d)\n", list1[i], list2[j]);
+			}
+		}
+	}
 	
 
 

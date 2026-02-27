@@ -30,7 +30,7 @@
  
 #include <stdio.h>
 
-int main() {
+int main(void) {
     // 16-character message (including spaces)
     char message[] = "COMPUTER SCIENCE"; 
     int grid_size = 4;
@@ -38,7 +38,13 @@ int main() {
     printf("Original: %s\n", message);
     printf("Ciphered: ");
 	
-	//complete the your code here
+	for(int col = 0; col < grid_size; col++){
+		for(int row = 0; row < grid_size; row++){
+			int index = (row * grid_size) + col;
+			printf("%c", message[index]);
+		}
+	}
+	printf("\n");
 
 
     return 0;

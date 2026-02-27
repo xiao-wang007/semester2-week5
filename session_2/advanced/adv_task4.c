@@ -21,7 +21,26 @@ int main(void){
 	
 	// complete the rest of the code here
 	// use pointer to modify the values
-	//int (*row_ptr)[4] = image; 
+	int (*row_ptr)[4] = image;
+
+	for(int i = 0; i < 3; i++){
+		int *pixel_ptr = *(row_ptr + i);
+		for(int j = 0; j < 4; j++){
+			int new_val = *(pixel_ptr + j) + boost;
+			if(new_val > max_val){
+				new_val = max_val;
+			}
+			*(pixel_ptr + j) = new_val;
+		}
+	}
+
+	printf("Processed image:\n");
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j < 4; j++){
+			printf("%d ", image[i][j]);
+		}
+		printf("\n");
+	}
 	
 	return 0;
 
